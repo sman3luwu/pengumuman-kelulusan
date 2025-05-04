@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengumuman Kelulusan SMAN 3 Luwu</title>
+    <script src="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            text-align: center;
+            padding: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .bold-red {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        #flipdown {
+            margin: 40px auto;
+        }
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tahun 2025 akan bisa diakses :</h2>
+    <div id="flipdown" class="flipdown"></div>
+
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="bold-red">#NoKonvoi #NoCoratCoret #NoDrugs #NoNarkoba</div>
+
+    <div class="card hidden" id="formPengumuman">
+        <h2>Pengumuman Kelulusan<br>SMAN 3 Luwu</h2>
+        <p>Masukkan NISN Anda untuk melihat hasil kelulusan:</p>
+        <input type="text" id="nisnInput" placeholder="Masukkan NISN">
+        <button onclick="cekKelulusan()">Cek</button>
+        <div id="hasil" class="result"></div>
+        <button id="printBtn" onclick="window.print()" style="display:none; margin-top:20px;">Cetak Hasil</button>
+    </div>
+
+    <script>
+    {js_data}
+
+    function cekKelulusan() {
+        const nisn = document.getElementById("nisnInput").value.trim();
+        const hasil = document.getElementById("hasil");
+        const printBtn = document.getElementById("printBtn");
+        const siswa = dataSiswa.find(s => s.NISN === nisn);
+        if (siswa) {
+            hasil.innerHTML = `
+                <div id="cetakArea">
+                    <h3>Data Siswa</h3>
+                    <p><strong>Nama:</strong> ${siswa.Nama || siswa.NAMA || "Tidak tersedia"}</p>
+                    <p><strong>NISN:</strong> ${siswa.NISN}</p>
+                    <p><strong>Kelas:</strong> ${siswa.Kelas || siswa.KELAS || "Tidak tersedia"}</p>
+                    <p><strong>Status:</strong> LULUS</p>
+                    <p><em>Selamat atas kelulusanmu! Semoga sukses untuk langkah selanjutnya.</em></p>
+                </div>`;
+            printBtn.style.display = "inline-block";
+        } else {
+            hasil.innerHTML = `<span style="color: red;">Data tidak ditemukan. Periksa kembali NISN Anda.</span>`;
+            printBtn.style.display = "none";
+        }
+    }
+
+    // Flipdown countdown to 5 May 2025 15:00 WITA (UTC+8 => 07:00 UTC)
+    document.addEventListener('DOMContentLoaded', () => {
+        var flipdown = new FlipDown(Math.floor(new Date("2025-05-05T07:00:00Z").getTime() / 1000))
+            .start()
+            .ifEnded(() => {
+                document.getElementById("flipdown").style.display = "none";
+                document.querySelector("h2").style.display = "none";
+                document.getElementById("formPengumuman").classList.remove("hidden");
+            });
+    });
+    </script>
+</body>
+</html>
