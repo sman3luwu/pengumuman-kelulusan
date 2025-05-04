@@ -1,0 +1,1534 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pengumuman Kelulusan SMAN 3 Luwu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f0ff;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      display: inline-block;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Pengumuman Kelulusan<br>SMAN 3 Luwu</h2>
+    <p>Masukkan NISN Anda untuk melihat hasil kelulusan:</p>
+    <input type="text" id="nisn" placeholder="Masukkan NISN">
+    <button onclick="cekKelulusan()">Cek</button>
+
+    <div id="hasil" class="result"></div>
+       <button id="printBtn" onclick="window.print()" style="display:none; margin-top:20px;">Cetak Hasil</button>
+  </div>
+
+  <script>
+    const dataSiswa = [
+  {
+    "nisn": "71050599",
+    "nama": "Amelia Naswar",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "89142487",
+    "nama": "Andi Elisa A",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78842878",
+    "nama": "Andi Keyzia Zalzabila Yulman",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78626944",
+    "nama": "Andi Makkulau A",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77652987",
+    "nama": "Andi Meilany Artika Sari",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75942401",
+    "nama": "Andien Regina Sahda",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "3071769237",
+    "nama": "Ardhiana Ansar",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71093435",
+    "nama": "Arizqa Nayla Abdiadi",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72520540",
+    "nama": "Asy Syifa Rachma S",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75914542",
+    "nama": "Barmanda Jaya",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71523427",
+    "nama": "Chelzi Suriadi",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71452809",
+    "nama": "Davit Kurniawan T",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61747840",
+    "nama": "Disvalya",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75069681",
+    "nama": "Fahril Mari",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79142120",
+    "nama": "Faiz Fauzan Amrul",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73121440",
+    "nama": "Fitrah Ramadhani",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79601035",
+    "nama": "Gita",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "89892664",
+    "nama": "Hasrianto Hajar",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76428493",
+    "nama": "M. Idjlal Syafir Ardhama",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79819846",
+    "nama": "Muh. Firdaus",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72280134",
+    "nama": "Muh. Luthfi",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "65020472",
+    "nama": "Muh. Mahesa Syawal",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "84596552",
+    "nama": "Muhammad Rivaldi",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79484184",
+    "nama": "Muhammad Izzah",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73811002",
+    "nama": "Nur Afdal",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74644892",
+    "nama": "Nurfadillah Munassir",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78067853",
+    "nama": "Nurul Fajriani Syam",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77328132",
+    "nama": "Reski Amelia",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "133584348",
+    "nama": "Rian Abdul Gafar",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "65099855",
+    "nama": "Safril Hidayat",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "81247223",
+    "nama": "Salza Nala Nafila",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77305174",
+    "nama": "Savina Mutia Hasan",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73390005",
+    "nama": "Syukran",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73154159",
+    "nama": "Ummul Mutiah",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76266101",
+    "nama": "Zalfa Azzahra",
+    "kelas": "XII MIPA1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72634744",
+    "nama": "Ainun Azzahrah",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73018616",
+    "nama": "Al Amin Rusmin",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73791399",
+    "nama": "Aldiat",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78581018",
+    "nama": "Andi Alfian",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73995693",
+    "nama": "Andi Azizah Noviani Alda",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75705919",
+    "nama": "Andi Naugy Nagauleng",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77709237",
+    "nama": "Anisa Farhaini",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74004696",
+    "nama": "Ardini Miranti",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67644413",
+    "nama": "Asriani",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71886030",
+    "nama": "Assifa Triani",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62960719",
+    "nama": "Devina Aurora Herianto",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78287533",
+    "nama": "Egi Ananda",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "82392165",
+    "nama": "Fitra Ramadani",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71016374",
+    "nama": "Getri Dursat",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76501324",
+    "nama": "Hafsah",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75320966",
+    "nama": "Muh. Fausi Agusman",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79553226",
+    "nama": "Muh. Fharel Alifsyah. P",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "82718142",
+    "nama": "Muh. Zhafran Iffat",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62152295",
+    "nama": "Muh. Adam Mukhris",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72202363",
+    "nama": "Muhammad Arga",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76263753",
+    "nama": "Muhammad Tegar Irpan",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76976563",
+    "nama": "Muhammad Yusuf",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75935458",
+    "nama": "Mutmainna",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76483310",
+    "nama": "Nadya Anastasya Riswanto",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "66925143",
+    "nama": "Nava Amalyandari Ach",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75168189",
+    "nama": "Nurpadillah",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72048326",
+    "nama": "Nurul Fitri",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62916720",
+    "nama": "Rahma",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78841498",
+    "nama": "Rahmat Alwi",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75874039",
+    "nama": "Raihan Husain",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "81378161",
+    "nama": "Rezky Rifaah",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73388371",
+    "nama": "Saidil Achmad",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67946011",
+    "nama": "Sarmila",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "133306977",
+    "nama": "Warnisyah Armin",
+    "kelas": "XII MIPA2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79688620",
+    "nama": "A. Maulidya Wanti Ady Wirawan",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77064947",
+    "nama": "Akmaluddin Palar",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77370230",
+    "nama": "Aldavianti",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74798957",
+    "nama": "Aldi",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75346257",
+    "nama": "Alif Aditiya",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79636046",
+    "nama": "Alim Putra Darmawan",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74812359",
+    "nama": "Anisa Alhafsari",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78239719",
+    "nama": "Ardina Miranti",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74641368",
+    "nama": "Aril",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "89368982",
+    "nama": "Bunga Keisya",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73059242",
+    "nama": "Cantika",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74273147",
+    "nama": "Dafin",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62006463",
+    "nama": "Desta Irawan",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72487858",
+    "nama": "Elsi",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74276766",
+    "nama": "Firdaus",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76189126",
+    "nama": "Hesti Agustina",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77122768",
+    "nama": "Muafia",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "3072872457",
+    "nama": "Muh. Dwi Kurniawan",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76575331",
+    "nama": "Muh. Qayyum",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "85297866",
+    "nama": "Muh. Syarifh Sahal",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61247600",
+    "nama": "Muhammad Aditya Syam",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77610947",
+    "nama": "Nahda Amelia",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "83309866",
+    "nama": "Najwa Quratul Aini",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78911335",
+    "nama": "Nani Aminarti",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "81941711",
+    "nama": "Nur Eliyana",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74248026",
+    "nama": "Nurul Istiqama",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72432174",
+    "nama": "Pujianto",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61201267",
+    "nama": "Putriyanti",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "63716037",
+    "nama": "Rasya",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "66107222",
+    "nama": "Rifaldi Asmawi Adam",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78473881",
+    "nama": "Rina Pebrianti Agus",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79785909",
+    "nama": "Rio Ghazy Ramadhan",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "83885493",
+    "nama": "Salsabila Aprisal",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "44144562",
+    "nama": "Selvia",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "85352120",
+    "nama": "Widiastuti",
+    "kelas": "XII MIPA3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "63937528",
+    "nama": "Abisar Al-Gifari",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78725142",
+    "nama": "Afika Amelia",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74925513",
+    "nama": "Ahmad Abizar",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77863675",
+    "nama": "Ahmad Fauzi Masdar",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78251198",
+    "nama": "Alisya Rizki Sabilla",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "64438799",
+    "nama": "Andi Cici Mentari",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71052403",
+    "nama": "Anugrah Alfadil",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72101788",
+    "nama": "Anugra Mutiara",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78776397",
+    "nama": "Aulya Nahjuah Virani",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72748047",
+    "nama": "Erika Pratiwi",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72743801",
+    "nama": "Farel Sabdi",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61805282",
+    "nama": "Firmansyah",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75988014",
+    "nama": "Fuji Lestari Amir",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71280106",
+    "nama": "Hesti",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72352704",
+    "nama": "Irwan Wahyudi M. Jufri",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67180919",
+    "nama": "Lisa",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "88145027",
+    "nama": "M. Aditya Kurniawan",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72914569",
+    "nama": "M. Nasdir",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77707387",
+    "nama": "M. Razya Al Fahrezi",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71396360",
+    "nama": "Miranda Salsabila",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76800639",
+    "nama": "Muh. Galang Rivansya Arifin",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78497355",
+    "nama": "Muhammad Apriliansyah",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "56920061",
+    "nama": "Muhammad Ramadhan Pratama",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72379842",
+    "nama": "Nayla Risky Tri Amalia Kadir",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67045625",
+    "nama": "Nesa Trihapsari",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "68429882",
+    "nama": "Nur Aliya",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "3065710349",
+    "nama": "Nuraida",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73100172",
+    "nama": "Putra Aljarra",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75379838",
+    "nama": "Rasti Nadya Sanju",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76601326",
+    "nama": "Refalina",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "65382301",
+    "nama": "Reyhan Mirdan",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75150409",
+    "nama": "Risky Irawan",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "86279771",
+    "nama": "Salsa",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79010481",
+    "nama": "Wijayanti",
+    "kelas": "XII MIPA4",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "68066942",
+    "nama": "A. Fitriani",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72476877",
+    "nama": "Aimin Muhaimin",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74671983",
+    "nama": "Alfarezy Akrab",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "82564733",
+    "nama": "Alfauzan Junior",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76544637",
+    "nama": "Alvia Hasan",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67607512",
+    "nama": "Aly Amrant Leoran Bompatue",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74569979",
+    "nama": "Andi Egar Ayunda",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74075782",
+    "nama": "Andi Zalsabila Avinni Virly",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "66372548",
+    "nama": "Andra",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75083699",
+    "nama": "April Peratama",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75316849",
+    "nama": "Asrini",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75723088",
+    "nama": "Aulia",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73561067",
+    "nama": "Gita Haeriani",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "63573517",
+    "nama": "Hervita",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "86996683",
+    "nama": "Kelsi",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61255542",
+    "nama": "Moh. Rifki Bahar",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61640421",
+    "nama": "Muh. Fathurrahman",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72918292",
+    "nama": "Nur Afifah",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "32665618",
+    "nama": "Nur Asisah Nasrun",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76750822",
+    "nama": "Nur Farida",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79405587",
+    "nama": "Rega Al Syaputra",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67796772",
+    "nama": "Regil Syawal",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77715170",
+    "nama": "Resky Anugrah",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62773704",
+    "nama": "Rian Febrianto",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62230810",
+    "nama": "Ridwan",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74303984",
+    "nama": "Rifqi Amri",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73191633",
+    "nama": "Salsa Nabila Putri",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "131099247",
+    "nama": "Sukni",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76419078",
+    "nama": "Surahmi",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71873755",
+    "nama": "Trisyafira Zalira",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78412139",
+    "nama": "Trianita",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76776596",
+    "nama": "Wildayanti",
+    "kelas": "XII MIPA5",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76258202",
+    "nama": "Ade Wiranata Sadli",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71117113",
+    "nama": "Adit Tasding",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61511752",
+    "nama": "Dinda Anastasia Putri",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "84292043",
+    "nama": "Diva Aviatri",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79118962",
+    "nama": "Fika Alpianti. M",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77869444",
+    "nama": "Fitria Az Zahra",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "83749953",
+    "nama": "Hairul",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74363220",
+    "nama": "Hanif Al Viqri",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76391187",
+    "nama": "Istikharah",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "86558352",
+    "nama": "Jumriana",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78028164",
+    "nama": "Laura Ayu Andira",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "138088221",
+    "nama": "Mar Atusyahira",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77717784",
+    "nama": "Muh. Adeyaksa",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78702100",
+    "nama": "Muhammad Arif Ilham",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "52921786",
+    "nama": "Muhammad Armanto",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "3078299760",
+    "nama": "Nur Padila",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62959803",
+    "nama": "Radit",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78366837",
+    "nama": "Rahmat Hidayat",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71167550",
+    "nama": "Rohania",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74551473",
+    "nama": "Rusdhi",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "66906371",
+    "nama": "Safar",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74269443",
+    "nama": "Saipullah",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77873159",
+    "nama": "Taufan Maulana Hakim",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76378480",
+    "nama": "Wahyuddin",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67724840",
+    "nama": "Yusnil Sulastri",
+    "kelas": "XII IPS1",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "89439888",
+    "nama": "Afdal Asril",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "81654962",
+    "nama": "Alisa",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76128602",
+    "nama": "Ambarqa Azarah",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75018529",
+    "nama": "Ansir",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "77240873",
+    "nama": "Aris",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73780556",
+    "nama": "Ayu Arvina",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "83370204",
+    "nama": "Dava Aviatra",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71031229",
+    "nama": "Dhewy Kamarudding",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74514744",
+    "nama": "Farrel Alfarista",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79115585",
+    "nama": "Fila",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "79124299",
+    "nama": "Jusni",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "62985434",
+    "nama": "Muh. Fachril",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75513632",
+    "nama": "Muh. Irgi Alfareza Wahab",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "86314960",
+    "nama": "Muh. Rifaldi",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78089619",
+    "nama": "Muh. Syafiq",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76970943",
+    "nama": "Muh.Fadel Fahrezi",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "87074155",
+    "nama": "Muhammad Rhesa",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "136048245",
+    "nama": "Nur Faiza",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73949541",
+    "nama": "Nurhikmah",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "65009543",
+    "nama": "Pikal",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61041943",
+    "nama": "Putriyana Nur Akma",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "67072496",
+    "nama": "Ramah",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "82088902",
+    "nama": "Risqullah",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "68076998",
+    "nama": "Sakkir",
+    "kelas": "XII IPS2",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76516189",
+    "nama": "Ahmad Rizky",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75874365",
+    "nama": "Ahsan",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "61523473",
+    "nama": "Ainul",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72937531",
+    "nama": "Amel",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "64122408",
+    "nama": "Amelia Rosita",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74975917",
+    "nama": "Anisa Dilviani",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75973464",
+    "nama": "Arip Pramana",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "74576455",
+    "nama": "Asman",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "51165192",
+    "nama": "Firda Minarti",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "86630655",
+    "nama": "Henki Saputra",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75841473",
+    "nama": "Ichsan",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "49783562",
+    "nama": "Ikmal Ilyas",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "69210783",
+    "nama": "Marcel",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "75650412",
+    "nama": "Maulana Khalil Ahmad",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "82443944",
+    "nama": "Muh. Irfan",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "71842130",
+    "nama": "Muhammad Fauzi",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "65225444",
+    "nama": "Muhammad Ibnu Raffi",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73187557",
+    "nama": "Nurlia",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73559095",
+    "nama": "Resa",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "76245503",
+    "nama": "Rezky Afsalur Rahman",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "82046693",
+    "nama": "Salman",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "73692236",
+    "nama": "Sarmini",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "72531599",
+    "nama": "Sera",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "81452512",
+    "nama": "Sitti Aisa",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  },
+  {
+    "nisn": "78528535",
+    "nama": "Widia Saputri",
+    "kelas": "XII IPS3",
+    "status": "LULUS"
+  }
+];
+
+    function cekKelulusan() {
+      const inputNISN = document.getElementById("nisn").value.trim();
+      const hasil = document.getElementById("hasil");
+      const siswa = dataSiswa.find(s => s.nisn === inputNISN);
+
+      if (siswa) {
+        hasil.innerHTML = `<div id="cetakArea">
+          <strong>Nama:</strong> ${siswa.nama}<br>
+          <strong>NISN:</strong> ${siswa.nisn}<br>
+          <strong>Kelas:</strong> ${siswa.kelas}<br>
+          <strong>Status:</strong> <span style="color: green; font-weight: bold;">${siswa.status}</span><br><br>
+          <em>Selamat atas kelulusanmu! Semoga sukses untuk langkah selanjutnya.</em>
+        `;
+      } else {
+        hasil.innerHTML = `<div id="cetakArea"><span style="color: red;">Data tidak ditemukan. Periksa kembali NISN Anda.</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
