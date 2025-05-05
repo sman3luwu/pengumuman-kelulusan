@@ -120,12 +120,12 @@ var x = setInterval(function () {
     document.getElementById("countdown").innerHTML = countdownText;
 
     if (distance > 0) {
-        document.getElementById("nisn").disabled = true;
+        document.getElementById("nisnInput").disabled = true;
         document.getElementById("submitBtn").disabled = true;
     } else {
         clearInterval(x);
         document.getElementById("countdown").innerHTML = "Waktu Pengumuman Telah Tiba";
-        document.getElementById("nisn").disabled = false;
+        document.getElementById("nisnInput").disabled = false;
         document.getElementById("submitBtn").disabled = false;
     }
 }, 1000);
