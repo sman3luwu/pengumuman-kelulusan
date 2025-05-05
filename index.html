@@ -77,10 +77,11 @@ function updateCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         countdownContainer.innerHTML = 
-            "#NoKonvoi #NoCoratCoret #NoDrugs #NoNarkoba" +
             "Pengumuman dapat diakses dalam: " + 
             (days > 0 ? days + "h " : "") + 
             hours + "j " + minutes + "m " + seconds + "d";
+           
+            "#NoKonvoi #NoCoratCoret #NoDrugs #NoNarkoba" +
         document.getElementById("countdown").appendChild(countdownContainer);
     }
 }
